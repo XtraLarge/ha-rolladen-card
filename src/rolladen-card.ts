@@ -186,7 +186,12 @@ export class RolladenCard extends LitElement {
     }
     .building.left .roof,
     .building.right .roof {
-      clip-path: polygon(23% 0, 77% 0, 100% 100%, 0 100%);
+      clip-path: none;
+      background-image:
+        repeating-linear-gradient(90deg, rgba(75,22,8,0.18) 0 1px, transparent 1px 13px),
+        linear-gradient(180deg, rgba(255,255,255,0.20) 0%, rgba(0,0,0,0.16) 100%);
+      border-radius: 3px 3px 0 0;
+      box-shadow: inset 0 -3px 4px rgba(0,0,0,0.18);
     }
     .chimney {
       position: absolute; top: 6px; left: 64%; width: 12px; height: 30px;
@@ -227,8 +232,8 @@ export class RolladenCard extends LitElement {
       box-shadow: 0 1px 3px rgba(30,41,59,0.09);
     }
     .floor {
-      display: flex; justify-content: center; align-items: flex-end;
-      gap: 12px; padding: 10px 0;
+      display: flex; justify-content: center; align-items: center;
+      gap: 12px; padding: 8px 0; min-height: 104px; box-sizing: border-box;
     }
     .floor + .floor { border-top: 1px dashed rgba(124,136,163,0.30); }
     .cell {
