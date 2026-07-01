@@ -115,6 +115,9 @@ export class RolladenCard extends LitElement {
         <div class="building">
           <div class="roof"></div>
           <div class="chimney"></div>
+          <div class="gutter"></div>
+          <div class="downpipe left"></div>
+          <div class="downpipe right"></div>
           <div class="wall">${rows}</div>
         </div>
       </div>
@@ -154,6 +157,8 @@ export class RolladenCard extends LitElement {
       --rc-door: #fde8d7;
       --rc-gate: #e7e2fb;
       --rc-line: #7c88a3;
+      --rc-metal-a: #9ea5b4;
+      --rc-metal-b: #cdd2dc;
     }
     ha-card { padding: 16px; background: var(--rc-bg); }
     .card-title {
@@ -177,17 +182,33 @@ export class RolladenCard extends LitElement {
         repeating-linear-gradient(90deg, rgba(75,22,8,0.12) 0 1px, transparent 1px 14px),
         linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(0,0,0,0.18) 100%);
       clip-path: polygon(50% 0, 100% 100%, 0 100%);
-      filter: drop-shadow(0 3px 3px rgba(30,41,59,0.28));
+      filter: drop-shadow(0 3px 3px rgba(30,41,59,0.28)); z-index: 3;
     }
     .chimney {
       position: absolute; top: 6px; left: 64%; width: 12px; height: 30px;
       background: linear-gradient(90deg, #9c5540 0%, #834632 100%);
-      border-radius: 1px 1px 0 0; z-index: 1;
+      border-radius: 1px 1px 0 0; z-index: 2;
     }
     .chimney::before {
       content: ''; position: absolute; top: -4px; left: -3px; right: -3px; height: 5px;
       background: #6f3a2a; border-radius: 2px;
     }
+    .gutter {
+      position: absolute; top: 45px; left: -5px; right: -5px; height: 6px;
+      background: linear-gradient(180deg, var(--rc-metal-b) 0%, var(--rc-metal-a) 100%);
+      border-radius: 1px 1px 4px 4px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 1px 2px rgba(30,41,59,0.25);
+      z-index: 2;
+    }
+    .downpipe {
+      position: absolute; top: 49px; bottom: 3px; width: 5px;
+      background: linear-gradient(90deg, var(--rc-metal-a) 0%, var(--rc-metal-b) 45%, var(--rc-metal-a) 100%);
+      border-radius: 2px;
+      box-shadow: 0 1px 2px rgba(30,41,59,0.25);
+      z-index: 2;
+    }
+    .downpipe.left { left: -3px; }
+    .downpipe.right { right: -3px; }
     .wall {
       display: flex; flex-direction: column;
       background: var(--rc-wall);
