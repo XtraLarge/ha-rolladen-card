@@ -1,0 +1,25 @@
+{
+  "name": "ha-rolladen-card",
+  "version": "0.1.0",
+  "description": "Home Assistant Lovelace Card: Haus-Fassaden mit Rolladensteuerung (F/B/T/O/L, live, hoch/stop/runter, Pastell)",
+  "type": "module",
+  "main": "dist/rolladen-card.js",
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -c --watch",
+    "lint": "tsc --noEmit"
+  },
+  "keywords": ["home-assistant", "lovelace", "custom-card", "rolladen", "cover"],
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.18.0",
+    "tslib": "^2.6.3",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "lit": "^3.1.4"
+  }
+}
