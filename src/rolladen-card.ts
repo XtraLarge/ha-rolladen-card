@@ -167,12 +167,15 @@ export class RolladenCard extends LitElement {
       font-size: 0.82rem; font-weight: 600; color: #64748b;
       letter-spacing: 0.04em; margin-bottom: 8px;
     }
-    .building { position: relative; display: inline-block; padding-top: 26px; }
+    .building { position: relative; display: inline-block; padding-top: 36px; }
     .roof {
-      position: absolute; top: 0; left: -13px; right: -13px; height: 30px;
-      background: linear-gradient(180deg, #d8a992 0%, var(--rc-roof) 100%);
-      clip-path: polygon(8% 100%, 26% 0, 74% 0, 92% 100%);
-      filter: drop-shadow(0 2px 3px rgba(30,41,59,0.22));
+      position: absolute; top: 0; left: -15px; right: -15px; height: 40px;
+      background:
+        repeating-linear-gradient(180deg,
+          rgba(120,45,25,0.16) 0 5px, rgba(255,255,255,0.10) 5px 6px),
+        linear-gradient(180deg, #e0997a 0%, #c4785b 100%);
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+      filter: drop-shadow(0 2px 3px rgba(30,41,59,0.25));
     }
     .wall {
       display: flex; flex-direction: column;
@@ -191,18 +194,18 @@ export class RolladenCard extends LitElement {
     .cell {
       flex: 0 0 auto; display: flex; align-items: flex-end;
     }
-    .cell.empty { width: 50px; height: 1px; }
+    .cell.empty { width: 52px; height: 1px; }
     .frame {
-      position: relative; width: 50px; height: 60px; border-radius: 4px;
+      position: relative; width: 52px; height: 66px; border-radius: 4px;
       background: var(--rc-frame);
       border: 2px solid #ffffff;
       box-shadow: 0 0 0 1px #c3ccdb, 0 2px 3px rgba(30,41,59,0.14);
       overflow: hidden;
     }
     .type-window .frame { background: var(--rc-window); }
-    .type-floorwindow .frame { background: var(--rc-floorwindow); height: 72px; }
-    .type-door .frame { background: var(--rc-door); height: 74px; }
-    .type-gate .frame { background: var(--rc-gate); width: 60px; height: 48px; }
+    .type-floorwindow .frame { background: var(--rc-floorwindow); height: 80px; }
+    .type-door .frame { background: var(--rc-door); height: 82px; }
+    .type-gate .frame { background: var(--rc-gate); width: 66px; height: 58px; }
     svg[part='picto'] {
       position: absolute; inset: 0; margin: auto; width: 72%; height: 72%;
       fill: none; stroke: var(--rc-line); stroke-width: 1.3; stroke-linecap: round;
@@ -218,12 +221,12 @@ export class RolladenCard extends LitElement {
     }
     .btns {
       position: absolute; inset: 0; z-index: 3;
-      display: flex; align-items: center; justify-content: center; gap: 3px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
     }
     .btn {
-      width: 14px; height: 14px; padding: 0; border: none; border-radius: 50%;
+      width: 17px; height: 17px; padding: 0; border: none; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.48rem; line-height: 1; cursor: pointer;
+      font-size: 0.66rem; line-height: 1; cursor: pointer;
       color: #4b5563; background: rgba(255,255,255,0.9);
       box-shadow: 0 1px 2px rgba(30,41,59,0.25); transition: background 0.15s, transform 0.05s;
     }
