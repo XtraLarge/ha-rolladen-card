@@ -67,9 +67,9 @@ function t(t,e,i,s){var r,o=arguments.length,n=o<3?e:null===s?s=Object.getOwnPro
       font-size: 0.82rem; font-weight: 600; color: #64748b;
       letter-spacing: 0.04em; margin-bottom: 8px;
     }
-    .building { position: relative; display: inline-block; padding-top: 47px; }
+    .building { position: relative; display: inline-block; padding-top: 58px; }
     .roof {
-      position: absolute; top: 0; left: -12px; right: -12px; height: 52px;
+      position: absolute; top: 0; left: -24px; right: -24px; height: 66px;
       background-color: #c06a4a;
       background-image:
         repeating-linear-gradient(0deg, rgba(75,22,8,0.20) 0 1px, transparent 1px 7px),
@@ -88,14 +88,14 @@ function t(t,e,i,s){var r,o=arguments.length,n=o<3?e:null===s?s=Object.getOwnPro
       background: #6f3a2a; border-radius: 2px;
     }
     .gutter {
-      position: absolute; top: 45px; left: -5px; right: -5px; height: 6px;
+      position: absolute; top: 56px; left: -6px; right: -6px; height: 6px;
       background: linear-gradient(180deg, var(--rc-metal-b) 0%, var(--rc-metal-a) 100%);
       border-radius: 1px 1px 4px 4px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 1px 2px rgba(30,41,59,0.25);
       z-index: 2;
     }
     .downpipe {
-      position: absolute; top: 49px; bottom: 3px; width: 5px;
+      position: absolute; top: 60px; bottom: 3px; width: 5px;
       background: linear-gradient(90deg, var(--rc-metal-a) 0%, var(--rc-metal-b) 45%, var(--rc-metal-a) 100%);
       border-radius: 2px;
       box-shadow: 0 1px 2px rgba(30,41,59,0.25);
