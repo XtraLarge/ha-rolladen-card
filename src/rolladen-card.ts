@@ -167,15 +167,16 @@ export class RolladenCard extends LitElement {
       font-size: 0.82rem; font-weight: 600; color: #64748b;
       letter-spacing: 0.04em; margin-bottom: 8px;
     }
-    .building { position: relative; display: inline-block; padding-top: 31px; }
+    .building { position: relative; display: inline-block; padding-top: 47px; }
     .roof {
-      position: absolute; top: 0; left: -14px; right: -14px; height: 34px;
-      background:
-        repeating-linear-gradient(180deg,
-          rgba(120,45,25,0.16) 0 5px, rgba(255,255,255,0.10) 5px 6px),
-        linear-gradient(180deg, #e0997a 0%, #c4785b 100%);
+      position: absolute; top: 0; left: -12px; right: -12px; height: 52px;
+      background-color: #c06a4a;
+      background-image:
+        repeating-linear-gradient(0deg, rgba(75,22,8,0.20) 0 1px, transparent 1px 7px),
+        repeating-linear-gradient(90deg, rgba(75,22,8,0.12) 0 1px, transparent 1px 14px),
+        linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(0,0,0,0.18) 100%);
       clip-path: polygon(50% 0, 100% 100%, 0 100%);
-      filter: drop-shadow(0 2px 3px rgba(30,41,59,0.25));
+      filter: drop-shadow(0 3px 3px rgba(30,41,59,0.28));
     }
     .wall {
       display: flex; flex-direction: column;
@@ -212,11 +213,11 @@ export class RolladenCard extends LitElement {
       opacity: 0.72; z-index: 1;
     }
     .shutter {
-      position: absolute; top: 0; left: 0; right: 0;
-      background: repeating-linear-gradient(180deg,
-        rgba(150,156,170,0.66) 0 3px, rgba(196,200,212,0.60) 3px 5px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), 0 2px 2px rgba(30,41,59,0.14);
-      border-bottom: 1px solid rgba(90,98,120,0.30);
+      position: absolute; top: 3px; left: 3px; right: 3px;
+      border-radius: 4px 4px 2px 2px;
+      background: repeating-linear-gradient(180deg, #c7cbd8 0 3px, #d8dbe5 3px 4.5px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.65), inset 0 -1px 2px rgba(30,41,59,0.12), 0 1px 2px rgba(30,41,59,0.16);
+      border-bottom: 1px solid rgba(90,98,120,0.38);
       transition: height 0.45s ease; z-index: 2;
     }
     .btns {
