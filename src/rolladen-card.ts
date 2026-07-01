@@ -112,7 +112,10 @@ export class RolladenCard extends LitElement {
     return html`
       <div class="side">
         <div class="side-label">${side.label ?? SIDE_DEFAULT_LABEL[key]}</div>
-        <div class="wall">${rows}</div>
+        <div class="building">
+          <div class="roof"></div>
+          <div class="wall">${rows}</div>
+        </div>
       </div>
     `;
   }
@@ -139,6 +142,8 @@ export class RolladenCard extends LitElement {
       --rc-wall: #eae7f1;
       --rc-wall-edge: #d6d3e4;
       --rc-ground: #bfc2d1;
+      --rc-roof: #cf9f89;
+      --rc-roof-edge: #b9866f;
       --rc-frame: #ffffff;
       --rc-shutter-a: #c4c8d6;
       --rc-shutter-b: #d9dce6;
@@ -154,13 +159,20 @@ export class RolladenCard extends LitElement {
       font-size: 1.05rem; font-weight: 600; color: #475569; margin: 0 0 14px 2px;
     }
     .house {
-      display: flex; flex-wrap: wrap; gap: 22px 24px;
+      display: flex; flex-wrap: wrap; gap: 24px 34px;
       justify-content: center; align-items: flex-start;
     }
     .side { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; }
     .side-label {
       font-size: 0.82rem; font-weight: 600; color: #64748b;
       letter-spacing: 0.04em; margin-bottom: 8px;
+    }
+    .building { position: relative; display: inline-block; padding-top: 26px; }
+    .roof {
+      position: absolute; top: 0; left: -13px; right: -13px; height: 30px;
+      background: linear-gradient(180deg, #d8a992 0%, var(--rc-roof) 100%);
+      clip-path: polygon(8% 100%, 26% 0, 74% 0, 92% 100%);
+      filter: drop-shadow(0 2px 3px rgba(30,41,59,0.22));
     }
     .wall {
       display: flex; flex-direction: column;
