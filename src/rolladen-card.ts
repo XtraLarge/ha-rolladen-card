@@ -102,7 +102,7 @@ export class RolladenCard extends LitElement {
     for (let i = 0; i < floors; i++) {
       const els = normalizeFloor(side.floors?.[i]);
       rows.push(html`
-        <div class="floor" style="grid-template-columns:repeat(${Math.max(els.length, 1)},1fr)">
+        <div class="floor">
           ${els.length
             ? els.map((el) => this._renderElement(el))
             : html`<div class="cell empty"></div>`}
@@ -112,7 +112,10 @@ export class RolladenCard extends LitElement {
     return html`
       <div class="side">
         <div class="side-label">${side.label ?? SIDE_DEFAULT_LABEL[key]}</div>
-        <div class="facade">${rows}</div>
+        <div class="building">
+          <div class="roof"></div>
+          <div class="wall">${rows}</div>
+        </div>
       </div>
     `;
   }
@@ -136,75 +139,93 @@ export class RolladenCard extends LitElement {
   static styles = css`
     :host {
       --rc-bg: #f6f7fb;
-      --rc-facade: #eceef6;
+      --rc-wall: #eae7f1;
+      --rc-wall-edge: #d8d5e6;
+      --rc-roof: #b7bccf;
+      --rc-ground: #c0c3d2;
       --rc-frame: #ffffff;
-      --rc-shutter-a: #ccd0dc;
-      --rc-shutter-b: #dee1ea;
+      --rc-shutter-a: #c4c8d6;
+      --rc-shutter-b: #d9dce6;
       --rc-accent: #a5b4fc;
       --rc-window: #dbeafe;
       --rc-floorwindow: #d6f3e0;
       --rc-door: #fde8d7;
       --rc-gate: #e7e2fb;
-      --rc-line: #8b93a7;
+      --rc-line: #7c88a3;
     }
-    ha-card { padding: 14px; background: var(--rc-bg); }
+    ha-card { padding: 16px; background: var(--rc-bg); }
     .card-title {
-      font-size: 1.05rem; font-weight: 600; color: #475569; margin: 0 0 12px 2px;
+      font-size: 1.05rem; font-weight: 600; color: #475569; margin: 0 0 14px 2px;
     }
     .house {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 14px;
-      align-items: start;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px 16px; justify-items: center; align-items: end;
     }
-    .side { min-width: 0; }
+    .side { min-width: 0; width: 100%; display: flex; flex-direction: column; align-items: center; }
     .side-label {
-      text-align: center; font-size: 0.82rem; font-weight: 600; color: #64748b;
-      letter-spacing: 0.04em; margin-bottom: 6px;
+      font-size: 0.82rem; font-weight: 600; color: #64748b;
+      letter-spacing: 0.04em; margin-bottom: 8px;
     }
-    .facade {
-      display: flex; flex-direction: column; gap: 8px;
-      background: var(--rc-facade); border-radius: 14px; padding: 10px;
+    .building { position: relative; display: inline-block; padding-top: 13px; }
+    .roof {
+      position: absolute; top: 0; left: -7px; right: -7px; height: 15px;
+      background: var(--rc-roof);
+      clip-path: polygon(7% 100%, 15% 0, 85% 0, 93% 100%);
     }
-    .floor { display: grid; gap: 8px; justify-items: center; align-items: start; }
+    .wall {
+      display: flex; flex-direction: column;
+      background: var(--rc-wall);
+      border: 1px solid var(--rc-wall-edge);
+      border-bottom: 4px solid var(--rc-ground);
+      border-radius: 3px 3px 4px 4px;
+      padding: 6px 12px 4px;
+      box-shadow: 0 1px 3px rgba(30,41,59,0.09);
+    }
+    .floor {
+      display: flex; justify-content: center; align-items: flex-end;
+      gap: 10px; padding: 9px 0;
+    }
+    .floor + .floor { border-top: 1px dashed rgba(124,136,163,0.30); }
     .cell {
-      display: flex; flex-direction: column; align-items: stretch; gap: 5px;
-      width: 100%; max-width: 82px; min-width: 0;
+      flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 5px;
     }
-    .cell.empty { min-height: 8px; }
+    .cell.empty { width: 44px; height: 1px; }
     .frame {
-      position: relative; aspect-ratio: 1 / 1.15; border-radius: 10px;
-      background: var(--rc-frame); overflow: hidden;
-      box-shadow: inset 0 0 0 1.5px rgba(148,163,184,0.28), 0 1px 2px rgba(30,41,59,0.06);
-      display: flex; align-items: center; justify-content: center;
+      position: relative; width: 44px; height: 54px; border-radius: 4px;
+      background: var(--rc-frame);
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px #c3ccdb, 0 2px 3px rgba(30,41,59,0.14);
+      overflow: hidden;
     }
     .type-window .frame { background: var(--rc-window); }
-    .type-floorwindow .frame { background: var(--rc-floorwindow); }
-    .type-door .frame { background: var(--rc-door); }
-    .type-gate .frame { background: var(--rc-gate); }
+    .type-floorwindow .frame { background: var(--rc-floorwindow); height: 64px; }
+    .type-door .frame { background: var(--rc-door); height: 66px; border-radius: 4px 4px 3px 3px; }
+    .type-gate .frame { background: var(--rc-gate); width: 54px; height: 42px; }
     svg[part='picto'] {
-      width: 56%; height: 56%; fill: none; stroke: var(--rc-line);
-      stroke-width: 1.4; stroke-linecap: round; opacity: 0.7; z-index: 1;
+      position: absolute; inset: 0; margin: auto; width: 72%; height: 72%;
+      fill: none; stroke: var(--rc-line); stroke-width: 1.3; stroke-linecap: round;
+      opacity: 0.55; z-index: 1;
     }
     .shutter {
-      position: absolute; top: 3px; left: 3px; right: 3px;
-      border-radius: 7px 7px 4px 4px;
+      position: absolute; top: 0; left: 0; right: 0;
       background: repeating-linear-gradient(180deg,
-        var(--rc-shutter-a) 0 3px, var(--rc-shutter-b) 3px 5px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 3px rgba(30,41,59,0.15);
+        var(--rc-shutter-a) 0 2.5px, var(--rc-shutter-b) 2.5px 4px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 1px 2px rgba(30,41,59,0.18);
+      border-bottom: 1px solid rgba(90,98,120,0.35);
       transition: height 0.45s ease; z-index: 2;
     }
     .warn {
-      position: absolute; z-index: 3; font-weight: 700; color: #dc2626; font-size: 1.1rem;
+      position: absolute; inset: 0; margin: auto; width: 1em; height: 1.2em;
+      z-index: 3; font-weight: 700; color: #dc2626; text-align: center;
     }
     .missing .frame { outline: 2px dashed #f87171; outline-offset: -2px; }
-    .btns {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; width: 100%;
-    }
+    .btns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; width: 44px; }
     .btn {
-      border: none; border-radius: 7px; padding: 4px 0; font-size: 0.66rem; line-height: 1;
-      cursor: pointer; color: #4b5563; background: #ffffff;
-      box-shadow: 0 1px 2px rgba(30,41,59,0.08); transition: background 0.15s, transform 0.05s;
+      border: none; border-radius: 5px; height: 16px; padding: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.52rem; line-height: 1; cursor: pointer; color: #5b6472; background: #fff;
+      box-shadow: 0 1px 1px rgba(30,41,59,0.12); transition: background 0.15s, transform 0.05s;
     }
     .btn:hover { background: var(--rc-accent); color: #fff; }
     .btn:active { transform: translateY(1px); }
