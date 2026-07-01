@@ -84,14 +84,14 @@ export class RolladenCard extends LitElement {
           ${PICTO[el.type]}
           ${showControls ? html`<div class="shutter" style="height:${coverPct}%"></div>` : nothing}
           ${missing ? html`<div class="warn">?</div>` : nothing}
+          ${showControls
+            ? html`<div class="btns">
+                <button class="btn" title="Hoch" @click=${() => this._call('open_cover', el.entity)}>▲</button>
+                <button class="btn" title="Stop" @click=${() => this._call('stop_cover', el.entity)}>■</button>
+                <button class="btn" title="Runter" @click=${() => this._call('close_cover', el.entity)}>▼</button>
+              </div>`
+            : nothing}
         </div>
-        ${showControls
-          ? html`<div class="btns">
-              <button class="btn up" title="Hoch" @click=${() => this._call('open_cover', el.entity)}>▲</button>
-              <button class="btn stop" title="Stop" @click=${() => this._call('stop_cover', el.entity)}>■</button>
-              <button class="btn down" title="Runter" @click=${() => this._call('close_cover', el.entity)}>▼</button>
-            </div>`
-          : nothing}
       </div>
     `;
   }
@@ -112,10 +112,7 @@ export class RolladenCard extends LitElement {
     return html`
       <div class="side">
         <div class="side-label">${side.label ?? SIDE_DEFAULT_LABEL[key]}</div>
-        <div class="building">
-          <div class="roof"></div>
-          <div class="wall">${rows}</div>
-        </div>
+        <div class="wall">${rows}</div>
       </div>
     `;
   }
@@ -140,9 +137,8 @@ export class RolladenCard extends LitElement {
     :host {
       --rc-bg: #f6f7fb;
       --rc-wall: #eae7f1;
-      --rc-wall-edge: #d8d5e6;
-      --rc-roof: #b7bccf;
-      --rc-ground: #c0c3d2;
+      --rc-wall-edge: #d6d3e4;
+      --rc-ground: #bfc2d1;
       --rc-frame: #ffffff;
       --rc-shutter-a: #c4c8d6;
       --rc-shutter-b: #d9dce6;
@@ -158,54 +154,47 @@ export class RolladenCard extends LitElement {
       font-size: 1.05rem; font-weight: 600; color: #475569; margin: 0 0 14px 2px;
     }
     .house {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 20px 16px; justify-items: center; align-items: end;
+      display: flex; flex-wrap: wrap; gap: 22px 24px;
+      justify-content: center; align-items: flex-start;
     }
-    .side { min-width: 0; width: 100%; display: flex; flex-direction: column; align-items: center; }
+    .side { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; }
     .side-label {
       font-size: 0.82rem; font-weight: 600; color: #64748b;
       letter-spacing: 0.04em; margin-bottom: 8px;
-    }
-    .building { position: relative; display: inline-block; padding-top: 13px; }
-    .roof {
-      position: absolute; top: 0; left: -7px; right: -7px; height: 15px;
-      background: var(--rc-roof);
-      clip-path: polygon(7% 100%, 15% 0, 85% 0, 93% 100%);
     }
     .wall {
       display: flex; flex-direction: column;
       background: var(--rc-wall);
       border: 1px solid var(--rc-wall-edge);
       border-bottom: 4px solid var(--rc-ground);
-      border-radius: 3px 3px 4px 4px;
-      padding: 6px 12px 4px;
+      border-radius: 4px;
+      padding: 8px 14px;
       box-shadow: 0 1px 3px rgba(30,41,59,0.09);
     }
     .floor {
       display: flex; justify-content: center; align-items: flex-end;
-      gap: 10px; padding: 9px 0;
+      gap: 12px; padding: 10px 0;
     }
     .floor + .floor { border-top: 1px dashed rgba(124,136,163,0.30); }
     .cell {
-      flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 5px;
+      flex: 0 0 auto; display: flex; align-items: flex-end;
     }
-    .cell.empty { width: 44px; height: 1px; }
+    .cell.empty { width: 50px; height: 1px; }
     .frame {
-      position: relative; width: 44px; height: 54px; border-radius: 4px;
+      position: relative; width: 50px; height: 60px; border-radius: 4px;
       background: var(--rc-frame);
       border: 2px solid #ffffff;
       box-shadow: 0 0 0 1px #c3ccdb, 0 2px 3px rgba(30,41,59,0.14);
       overflow: hidden;
     }
     .type-window .frame { background: var(--rc-window); }
-    .type-floorwindow .frame { background: var(--rc-floorwindow); height: 64px; }
-    .type-door .frame { background: var(--rc-door); height: 66px; border-radius: 4px 4px 3px 3px; }
-    .type-gate .frame { background: var(--rc-gate); width: 54px; height: 42px; }
+    .type-floorwindow .frame { background: var(--rc-floorwindow); height: 72px; }
+    .type-door .frame { background: var(--rc-door); height: 74px; }
+    .type-gate .frame { background: var(--rc-gate); width: 60px; height: 48px; }
     svg[part='picto'] {
       position: absolute; inset: 0; margin: auto; width: 72%; height: 72%;
       fill: none; stroke: var(--rc-line); stroke-width: 1.3; stroke-linecap: round;
-      opacity: 0.55; z-index: 1;
+      opacity: 0.5; z-index: 1;
     }
     .shutter {
       position: absolute; top: 0; left: 0; right: 0;
@@ -215,20 +204,24 @@ export class RolladenCard extends LitElement {
       border-bottom: 1px solid rgba(90,98,120,0.35);
       transition: height 0.45s ease; z-index: 2;
     }
+    .btns {
+      position: absolute; inset: 0; z-index: 3;
+      display: flex; align-items: center; justify-content: center; gap: 3px;
+    }
+    .btn {
+      width: 14px; height: 14px; padding: 0; border: none; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.48rem; line-height: 1; cursor: pointer;
+      color: #4b5563; background: rgba(255,255,255,0.9);
+      box-shadow: 0 1px 2px rgba(30,41,59,0.25); transition: background 0.15s, transform 0.05s;
+    }
+    .btn:hover { background: var(--rc-accent); color: #fff; }
+    .btn:active { transform: translateY(1px); }
     .warn {
       position: absolute; inset: 0; margin: auto; width: 1em; height: 1.2em;
       z-index: 3; font-weight: 700; color: #dc2626; text-align: center;
     }
     .missing .frame { outline: 2px dashed #f87171; outline-offset: -2px; }
-    .btns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; width: 44px; }
-    .btn {
-      border: none; border-radius: 5px; height: 16px; padding: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.52rem; line-height: 1; cursor: pointer; color: #5b6472; background: #fff;
-      box-shadow: 0 1px 1px rgba(30,41,59,0.12); transition: background 0.15s, transform 0.05s;
-    }
-    .btn:hover { background: var(--rc-accent); color: #fff; }
-    .btn:active { transform: translateY(1px); }
     .hint { color: #94a3b8; font-size: 0.85rem; padding: 8px; }
   `;
 }
