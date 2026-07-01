@@ -114,6 +114,7 @@ export class RolladenCard extends LitElement {
         <div class="side-label">${side.label ?? SIDE_DEFAULT_LABEL[key]}</div>
         <div class="building">
           <div class="roof"></div>
+          <div class="chimney"></div>
           <div class="wall">${rows}</div>
         </div>
       </div>
@@ -178,6 +179,15 @@ export class RolladenCard extends LitElement {
       clip-path: polygon(50% 0, 100% 100%, 0 100%);
       filter: drop-shadow(0 3px 3px rgba(30,41,59,0.28));
     }
+    .chimney {
+      position: absolute; top: 6px; left: 64%; width: 12px; height: 30px;
+      background: linear-gradient(90deg, #9c5540 0%, #834632 100%);
+      border-radius: 1px 1px 0 0; z-index: 1;
+    }
+    .chimney::before {
+      content: ''; position: absolute; top: -4px; left: -3px; right: -3px; height: 5px;
+      background: #6f3a2a; border-radius: 2px;
+    }
     .wall {
       display: flex; flex-direction: column;
       background: var(--rc-wall);
@@ -193,11 +203,11 @@ export class RolladenCard extends LitElement {
     }
     .floor + .floor { border-top: 1px dashed rgba(124,136,163,0.30); }
     .cell {
-      flex: 0 0 auto; display: flex; align-items: flex-end;
+      flex: 0 0 auto; width: 58px; display: flex; align-items: flex-end; justify-content: center;
     }
-    .cell.empty { width: 52px; height: 1px; }
+    .cell.empty { width: 58px; height: 1px; }
     .frame {
-      position: relative; width: 50px; height: 62px; border-radius: 3px;
+      position: relative; width: 48px; height: 62px; border-radius: 3px;
       background: var(--rc-frame);
       border: 3px solid #ffffff;
       box-shadow: 0 0 0 1.5px #b7c1d4, 0 4px 0 -1px #d3c7b7, 0 7px 6px rgba(30,41,59,0.16);
@@ -206,7 +216,7 @@ export class RolladenCard extends LitElement {
     .type-window .frame { background: var(--rc-window); }
     .type-floorwindow .frame { background: var(--rc-floorwindow); height: 80px; }
     .type-door .frame { background: var(--rc-door); height: 82px; }
-    .type-gate .frame { background: var(--rc-gate); width: 66px; height: 58px; }
+    .type-gate .frame { background: var(--rc-gate); height: 50px; }
     svg[part='picto'] {
       position: absolute; inset: 0; margin: auto; width: 72%; height: 72%;
       fill: none; stroke: var(--rc-line); stroke-width: 1.5; stroke-linecap: round;
