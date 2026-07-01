@@ -197,6 +197,10 @@ export class RolladenCard extends LitElement {
       content: ''; position: absolute; top: -4px; left: -3px; right: -3px; height: 5px;
       background: #6f3a2a; border-radius: 2px;
     }
+    .building.front .chimney,
+    .building.right .chimney { left: 68%; }
+    .building.back .chimney,
+    .building.left .chimney { left: 32%; }
     .gutter {
       position: absolute; top: 56px; left: -6px; right: -6px; height: 6px;
       background: linear-gradient(180deg, var(--rc-metal-b) 0%, var(--rc-metal-a) 100%);
