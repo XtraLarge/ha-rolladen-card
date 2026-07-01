@@ -18,6 +18,9 @@ Live-Rolladenstand und hoch/stop/runter-Buttons. Clean, pastellfarben, responsiv
 | `O` | `gate` | ja | Tor |
 | `L` | `empty` | nein | Leerraum (keine Entität, keine Buttons) |
 
+
+Steuerbare Elemente (`F/B/T/O`) **ohne** `entity` werden als **statisches Piktogramm** gezeichnet (kein Rolladen-Overlay, keine Buttons) – für Fenster/Türen ohne Rolladen. Ein `?`-Hinweis erscheint nur, wenn eine `entity` konfiguriert ist, in HA aber nicht existiert.
+
 Steuerbare Elemente nutzen die HA-Standard-Services `cover.open_cover`,
 `cover.stop_cover`, `cover.close_cover`. Der Rolladenstand wird live aus dem
 Attribut `current_position` gelesen (HA-Konvention: `0` = zu, `100` = offen).

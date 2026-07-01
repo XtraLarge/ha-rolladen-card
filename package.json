@@ -1,6 +1,6 @@
 {
   "name": "ha-rolladen-card",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Home Assistant Lovelace Card: Haus-Fassaden mit Rolladensteuerung (F/B/T/O/L, live, hoch/stop/runter, Pastell)",
   "type": "module",
   "main": "dist/rolladen-card.js",

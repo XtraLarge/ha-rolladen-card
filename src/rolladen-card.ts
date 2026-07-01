@@ -9,7 +9,6 @@ import {
   ElementType,
   SIDE_ORDER,
   SIDE_DEFAULT_LABEL,
-  CONTROLLABLE,
 } from './types';
 import { normalizeFloor } from './parse';
 
@@ -71,20 +70,22 @@ export class RolladenCard extends LitElement {
     if (el.type === 'empty') {
       return html`<div class="cell empty"></div>`;
     }
-    const controllable = CONTROLLABLE.includes(el.type);
+    const hasEntity = !!el.entity;
+    const missing = hasEntity && !!this.hass && !this.hass.states[el.entity as string];
     const pos = this._position(el);
-    const missing = controllable && (!el.entity || (this.hass && !this.hass.states[el.entity]));
     const coverPct = pos === null ? 100 : 100 - pos; // Rolladen fuellt von oben
-    const st = el.entity && this.hass ? this.hass.states[el.entity] : undefined;
+    const showControls = hasEntity && !missing; // statische Elemente (kein entity) = nur Piktogramm
+    const st = hasEntity && this.hass ? this.hass.states[el.entity as string] : undefined;
     const title = el.name ?? st?.attributes?.friendly_name ?? el.entity ?? '';
+    const cls = missing ? 'missing' : (!hasEntity ? 'static' : '');
     return html`
-      <div class="cell type-${el.type} ${missing ? 'missing' : ''}" title=${title}>
+      <div class="cell type-${el.type} ${cls}" title=${title}>
         <div class="frame">
           ${PICTO[el.type]}
-          <div class="shutter" style="height:${coverPct}%"></div>
+          ${showControls ? html`<div class="shutter" style="height:${coverPct}%"></div>` : nothing}
           ${missing ? html`<div class="warn">?</div>` : nothing}
         </div>
-        ${controllable
+        ${showControls
           ? html`<div class="btns">
               <button class="btn up" title="Hoch" @click=${() => this._call('open_cover', el.entity)}>▲</button>
               <button class="btn stop" title="Stop" @click=${() => this._call('stop_cover', el.entity)}>■</button>
@@ -243,6 +244,7 @@ export class RolladenCard extends LitElement {
       font-size: 1.1rem;
     }
     .missing .frame { outline: 1.5px dashed #f87171; }
+    .static .frame { opacity: 0.92; }
     .btns {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
