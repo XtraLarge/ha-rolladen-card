@@ -248,9 +248,9 @@ export class RolladenCard extends LitElement {
       overflow: hidden;
     }
     .type-window .frame { background: var(--rc-window); }
-    .type-floorwindow .frame { background: var(--rc-floorwindow); height: 80px; }
+    .type-floorwindow .frame { background: var(--rc-floorwindow); width: 40px; height: 86px; }
     .type-door .frame { background: var(--rc-door); height: 82px; }
-    .type-gate .frame { background: var(--rc-gate); height: 50px; }
+    .type-gate .frame { background: var(--rc-gate); width: 56px; height: 60px; }
     svg[part='picto'] {
       position: absolute; inset: 0; margin: auto; width: 72%; height: 72%;
       fill: none; stroke: var(--rc-line); stroke-width: 1.5; stroke-linecap: round;
