@@ -284,7 +284,7 @@ export class RolladenCard extends LitElement {
 
 /* eslint-disable no-console */
 console.info(
-  '%c ROLLADEN-CARD %c v0.1.0 ',
+  '%c ROLLADEN-CARD %c v0.1.1 ',
   'background:#a5b4fc;color:#fff;border-radius:3px 0 0 3px;padding:2px 4px',
   'background:#eef1f8;color:#475569;border-radius:0 3px 3px 0;padding:2px 4px'
 );
