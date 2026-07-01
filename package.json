@@ -7,14 +7,22 @@
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -c --watch",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "test": "node test/smoke.mjs"
   },
-  "keywords": ["home-assistant", "lovelace", "custom-card", "rolladen", "cover"],
+  "keywords": [
+    "home-assistant",
+    "lovelace",
+    "custom-card",
+    "rolladen",
+    "cover"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-typescript": "^11.1.6",
     "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "jsdom": "^29.1.1",
     "rollup": "^4.18.0",
     "tslib": "^2.6.3",
     "typescript": "^5.4.5"
