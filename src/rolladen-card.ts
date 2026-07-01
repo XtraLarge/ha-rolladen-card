@@ -167,9 +167,9 @@ export class RolladenCard extends LitElement {
       font-size: 0.82rem; font-weight: 600; color: #64748b;
       letter-spacing: 0.04em; margin-bottom: 8px;
     }
-    .building { position: relative; display: inline-block; padding-top: 36px; }
+    .building { position: relative; display: inline-block; padding-top: 31px; }
     .roof {
-      position: absolute; top: 0; left: -15px; right: -15px; height: 40px;
+      position: absolute; top: 0; left: -14px; right: -14px; height: 34px;
       background:
         repeating-linear-gradient(180deg,
           rgba(120,45,25,0.16) 0 5px, rgba(255,255,255,0.10) 5px 6px),
@@ -196,10 +196,10 @@ export class RolladenCard extends LitElement {
     }
     .cell.empty { width: 52px; height: 1px; }
     .frame {
-      position: relative; width: 52px; height: 66px; border-radius: 4px;
+      position: relative; width: 50px; height: 62px; border-radius: 3px;
       background: var(--rc-frame);
-      border: 2px solid #ffffff;
-      box-shadow: 0 0 0 1px #c3ccdb, 0 2px 3px rgba(30,41,59,0.14);
+      border: 3px solid #ffffff;
+      box-shadow: 0 0 0 1.5px #b7c1d4, 0 4px 0 -1px #d3c7b7, 0 7px 6px rgba(30,41,59,0.16);
       overflow: hidden;
     }
     .type-window .frame { background: var(--rc-window); }
@@ -208,30 +208,32 @@ export class RolladenCard extends LitElement {
     .type-gate .frame { background: var(--rc-gate); width: 66px; height: 58px; }
     svg[part='picto'] {
       position: absolute; inset: 0; margin: auto; width: 72%; height: 72%;
-      fill: none; stroke: var(--rc-line); stroke-width: 1.3; stroke-linecap: round;
-      opacity: 0.5; z-index: 1;
+      fill: none; stroke: var(--rc-line); stroke-width: 1.5; stroke-linecap: round;
+      opacity: 0.72; z-index: 1;
     }
     .shutter {
       position: absolute; top: 0; left: 0; right: 0;
       background: repeating-linear-gradient(180deg,
-        var(--rc-shutter-a) 0 2.5px, var(--rc-shutter-b) 2.5px 4px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 1px 2px rgba(30,41,59,0.18);
-      border-bottom: 1px solid rgba(90,98,120,0.35);
+        rgba(150,156,170,0.66) 0 3px, rgba(196,200,212,0.60) 3px 5px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), 0 2px 2px rgba(30,41,59,0.14);
+      border-bottom: 1px solid rgba(90,98,120,0.30);
       transition: height 0.45s ease; z-index: 2;
     }
     .btns {
       position: absolute; inset: 0; z-index: 3;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+      opacity: 0.55; transition: opacity 0.15s ease;
     }
     .btn {
-      width: 17px; height: 17px; padding: 0; border: none; border-radius: 50%;
+      width: 16px; height: 16px; padding: 0; border: none; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.66rem; line-height: 1; cursor: pointer;
-      color: #4b5563; background: rgba(255,255,255,0.9);
-      box-shadow: 0 1px 2px rgba(30,41,59,0.25); transition: background 0.15s, transform 0.05s;
+      font-size: 0.62rem; line-height: 1; cursor: pointer;
+      color: #4b5563; background: rgba(255,255,255,0.95);
+      box-shadow: 0 1px 2px rgba(30,41,59,0.28); transition: background 0.15s, transform 0.05s;
     }
     .btn:hover { background: var(--rc-accent); color: #fff; }
     .btn:active { transform: translateY(1px); }
+    .cell:hover .btns { opacity: 1; }
     .warn {
       position: absolute; inset: 0; margin: auto; width: 1em; height: 1.2em;
       z-index: 3; font-weight: 700; color: #dc2626; text-align: center;
