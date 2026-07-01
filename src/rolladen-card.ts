@@ -112,7 +112,7 @@ export class RolladenCard extends LitElement {
     return html`
       <div class="side">
         <div class="side-label">${side.label ?? SIDE_DEFAULT_LABEL[key]}</div>
-        <div class="building">
+        <div class="building ${key}">
           <div class="roof"></div>
           <div class="chimney"></div>
           <div class="gutter"></div>
@@ -183,6 +183,10 @@ export class RolladenCard extends LitElement {
         linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(0,0,0,0.18) 100%);
       clip-path: polygon(50% 0, 100% 100%, 0 100%);
       filter: drop-shadow(0 3px 3px rgba(30,41,59,0.28)); z-index: 3;
+    }
+    .building.left .roof,
+    .building.right .roof {
+      clip-path: polygon(23% 0, 77% 0, 100% 100%, 0 100%);
     }
     .chimney {
       position: absolute; top: 6px; left: 64%; width: 12px; height: 30px;
