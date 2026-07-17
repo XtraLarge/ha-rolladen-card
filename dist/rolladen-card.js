@@ -29,6 +29,7 @@ function t(t,e,i,s){var r,o=arguments.length,n=o<3?e:null===s?s=Object.getOwnPro
       </div>
     `}render(){if(!this._config)return V;const t=this._config.sides??{},e=ut.filter(e=>(t[e]?.enabled??!0)&&t[e]);return I`
       <ha-card>
+        <div class="verbadge">v026</div>
         ${this._config.title?I`<div class="card-title">${this._config.title}</div>`:V}
         <div class="house">
           ${e.length?e.map(e=>this._renderSide(e,t[e])):I`<div class="hint">Keine aktiven Seiten konfiguriert.</div>`}
@@ -131,20 +132,20 @@ function t(t,e,i,s){var r,o=arguments.length,n=o<3?e:null===s?s=Object.getOwnPro
     }
     .floor + .floor { border-top: 1px dashed rgba(124,136,163,0.30); }
     .cell {
-      flex: 0 0 auto; width: 58px; display: flex; align-items: flex-end; justify-content: center;
+      flex: 0 0 auto; width: 64px; display: flex; align-items: flex-end; justify-content: center;
     }
-    .cell.empty { width: 58px; height: 1px; }
+    .cell.empty { width: 64px; height: 1px; }
     .frame {
-      position: relative; width: 48px; height: 62px; border-radius: 3px;
+      position: relative; box-sizing: border-box; width: 46px; height: 62px; border-radius: 3px;
       background: var(--rc-frame);
       border: 3px solid #ffffff;
       box-shadow: 0 0 0 1.5px #b7c1d4, 0 4px 0 -1px #d3c7b7, 0 7px 6px rgba(30,41,59,0.16);
       overflow: hidden;
     }
     .type-window .frame { background: var(--rc-window); }
-    .type-floorwindow .frame { background: var(--rc-floorwindow); width: 40px; height: 86px; }
-    .type-door .frame { background: var(--rc-door); height: 82px; }
-    .type-gate .frame { background: var(--rc-gate); width: 56px; height: 60px; }
+    .type-floorwindow .frame { background: var(--rc-floorwindow); width: 34px; height: 86px; }
+    .type-door .frame { background: var(--rc-door); width: 44px; height: 82px; }
+    .type-gate .frame { background: var(--rc-gate); width: 58px; height: 58px; }
     svg[part='picto'] {
       position: absolute; inset: 0; margin: auto; width: 72%; height: 72%;
       fill: none; stroke: var(--rc-line); stroke-width: 1.5; stroke-linecap: round;
@@ -179,4 +180,5 @@ function t(t,e,i,s){var r,o=arguments.length,n=o<3?e:null===s?s=Object.getOwnPro
     }
     .missing .frame { outline: 2px dashed #f87171; outline-offset: -2px; }
     .hint { color: #94a3b8; font-size: 0.85rem; padding: 8px; }
-  `,t([ct({attribute:!1})],xt.prototype,"hass",void 0),t([function(t){return ct({...t,state:!0,attribute:!1})}()],xt.prototype,"_config",void 0),xt=t([(t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}):customElements.define(t,e)})("rolladen-card")],xt),window.customCards=window.customCards||[],window.customCards.push({type:"rolladen-card",name:"Rolladen Card",description:"Haus-Fassaden mit Live-Rolladensteuerung (F/B/T/O/L, Pastell)",preview:!1}),console.info("%c ROLLADEN-CARD %c v0.1.1 ","background:#a5b4fc;color:#fff;border-radius:3px 0 0 3px;padding:2px 4px","background:#eef1f8;color:#475569;border-radius:0 3px 3px 0;padding:2px 4px");export{xt as RolladenCard};
+    .verbadge { position: absolute; top: 6px; right: 10px; font-size: 0.6rem; color: #b3bacc; opacity: 0.6; }
+  `,t([ct({attribute:!1})],xt.prototype,"hass",void 0),t([function(t){return ct({...t,state:!0,attribute:!1})}()],xt.prototype,"_config",void 0),xt=t([(t=>(e,i)=>{void 0!==i?i.addInitializer(()=>{customElements.define(t,e)}):customElements.define(t,e)})("rolladen-card")],xt),window.customCards=window.customCards||[],window.customCards.push({type:"rolladen-card",name:"Rolladen Card",description:"Haus-Fassaden mit Live-Rolladensteuerung (F/B/T/O/L, Pastell)",preview:!1}),console.info("%c ROLLADEN-CARD %c v026 ","background:#a5b4fc;color:#fff;border-radius:3px 0 0 3px;padding:2px 4px","background:#eef1f8;color:#475569;border-radius:0 3px 3px 0;padding:2px 4px");export{xt as RolladenCard};

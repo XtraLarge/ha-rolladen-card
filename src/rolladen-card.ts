@@ -130,6 +130,7 @@ export class RolladenCard extends LitElement {
     const active = SIDE_ORDER.filter((k) => (sides[k]?.enabled ?? true) && sides[k]);
     return html`
       <ha-card>
+        <div class="verbadge">v026</div>
         ${this._config.title ? html`<div class="card-title">${this._config.title}</div>` : nothing}
         <div class="house">
           ${active.length
@@ -237,20 +238,20 @@ export class RolladenCard extends LitElement {
     }
     .floor + .floor { border-top: 1px dashed rgba(124,136,163,0.30); }
     .cell {
-      flex: 0 0 auto; width: 58px; display: flex; align-items: flex-end; justify-content: center;
+      flex: 0 0 auto; width: 64px; display: flex; align-items: flex-end; justify-content: center;
     }
-    .cell.empty { width: 58px; height: 1px; }
+    .cell.empty { width: 64px; height: 1px; }
     .frame {
-      position: relative; width: 48px; height: 62px; border-radius: 3px;
+      position: relative; box-sizing: border-box; width: 46px; height: 62px; border-radius: 3px;
       background: var(--rc-frame);
       border: 3px solid #ffffff;
       box-shadow: 0 0 0 1.5px #b7c1d4, 0 4px 0 -1px #d3c7b7, 0 7px 6px rgba(30,41,59,0.16);
       overflow: hidden;
     }
     .type-window .frame { background: var(--rc-window); }
-    .type-floorwindow .frame { background: var(--rc-floorwindow); width: 40px; height: 86px; }
-    .type-door .frame { background: var(--rc-door); height: 82px; }
-    .type-gate .frame { background: var(--rc-gate); width: 56px; height: 60px; }
+    .type-floorwindow .frame { background: var(--rc-floorwindow); width: 34px; height: 86px; }
+    .type-door .frame { background: var(--rc-door); width: 44px; height: 82px; }
+    .type-gate .frame { background: var(--rc-gate); width: 58px; height: 58px; }
     svg[part='picto'] {
       position: absolute; inset: 0; margin: auto; width: 72%; height: 72%;
       fill: none; stroke: var(--rc-line); stroke-width: 1.5; stroke-linecap: round;
@@ -285,6 +286,7 @@ export class RolladenCard extends LitElement {
     }
     .missing .frame { outline: 2px dashed #f87171; outline-offset: -2px; }
     .hint { color: #94a3b8; font-size: 0.85rem; padding: 8px; }
+    .verbadge { position: absolute; top: 6px; right: 10px; font-size: 0.6rem; color: #b3bacc; opacity: 0.6; }
   `;
 }
 
@@ -300,7 +302,7 @@ export class RolladenCard extends LitElement {
 
 /* eslint-disable no-console */
 console.info(
-  '%c ROLLADEN-CARD %c v0.1.1 ',
+  '%c ROLLADEN-CARD %c v026 ',
   'background:#a5b4fc;color:#fff;border-radius:3px 0 0 3px;padding:2px 4px',
   'background:#eef1f8;color:#475569;border-radius:0 3px 3px 0;padding:2px 4px'
 );
