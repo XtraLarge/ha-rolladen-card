@@ -1,3 +1,13 @@
 node_modules/
 *.log
 .DS_Store
+
+# Secrets / lokale Umgebungen (nicht committen)
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+credentials
+credentials.json
